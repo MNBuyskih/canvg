@@ -1188,7 +1188,7 @@ function build(opts) {
       ctx.miterLimit = 4;
       if (ctx.canvas.style && typeof ctx.font != 'undefined' && typeof windowEnv.getComputedStyle != 'undefined') {
         ctx.font = windowEnv.getComputedStyle(ctx.canvas).getPropertyValue('font');
-        
+
         var fontSize = new svg.Property('fontSize', svg.Font.Parse(ctx.font).fontSize);
         if (fontSize.hasValue()) svg.rootEmSize = svg.emSize = fontSize.toPixels('y');
       }
@@ -2620,7 +2620,9 @@ function build(opts) {
     this.getBoundingBox = function (ctx) {
       var bb = new svg.BoundingBox();
       for (var i = 0; i < this.children.length; i++) {
-        bb.addBoundingBox(this.children[i].getBoundingBox(ctx));
+        if(this.children[i].getBoundingBox) {
+          bb.addBoundingBox(this.children[i].getBoundingBox(ctx));
+        }
       }
       return bb;
     };
