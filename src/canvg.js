@@ -2559,7 +2559,10 @@ function build(opts) {
     this.loaded = false;
     if (!isSvg) {
       this.img = nodeEnv ? new ImageClass() : document.createElement('img');
-      if (svg.opts['useCORS'] == true) { this.img.crossOrigin = 'Anonymous'; }
+      if (svg.opts['useCORS'] == true) {
+        this.img.crossOrigin = 'Anonymous';
+        href += href + (href.indexOf('?') > 0 ? "&" : "?") + Date.now();
+      }
       var self = this;
       this.img.onload = function () { self.loaded = true; }
       this.img.onerror = function () {
