@@ -2533,10 +2533,7 @@
 	    this.loaded = false;
 	    if (!isSvg) {
 	      this.img = new ImageClass();
-	      if (svg.opts['useCORS'] == true) {
-	        this.img.crossOrigin = 'Anonymous';
-	        href += href + (href.indexOf('?') > 0 ? "&" : "?") + Date.now();
-	      }
+	      if (svg.opts['useCORS'] == true) { this.img.crossOrigin = 'Anonymous';}
 	      var self = this;
 	      this.img.onload = function () { self.loaded = true; };
 	      this.img.onerror = function () {
